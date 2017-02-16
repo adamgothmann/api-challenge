@@ -4,12 +4,21 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({extended: false});
 
+require('dotenv').config();
+
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.get('/', function(req, res){
   console.log('base url');
   res.sendFile(path.resolve('public/views/index.html'));
+});
+
+var env = process.env.API_KEY;
+
+app.get('/key', function(req, res){
+  console.log(env);
+  res.json(env);
 });
 
 app.set('port', process.env.PORT || 8080);

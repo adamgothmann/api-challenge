@@ -7,8 +7,6 @@
     <script src="/scripts/script.js" charset="utf-8"></script>
   </head>
   <body ng-controller="mainController">
-    <p>
-      something
-    </p>
+    <p ng-repeat="animal in animals">{{animal.commonName}}</p>
   </body>
 </html>
