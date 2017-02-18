@@ -1,0 +1,19 @@
+<form ng-submit="createAnimal()">
+  <div>
+    <label for="">Common Name:</label>
+    <input type="text" ng-model="$parent.commonName" name="name" value="">
+  </div>
+  <div>
+    <label for="">Scientific Name:</label>
+    <input type="text" ng-model="$parent.scientificName" name="name" value="">
+  </div>
+  <div>
+    <label for="">Family:</label>
+    <input type="text" ng-model="$parent.family" name="name" value="">
+  </div>
+  <div>
+    <label for="">Image URL:</label>
+    <input type="text" ng-model="$parent.url" name="name" value="">
+  </div>
+  <input type="submit" name="name" value="Submit">
+</form>

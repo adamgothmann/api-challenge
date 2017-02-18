@@ -7,6 +7,12 @@
     <script src="/scripts/script.js" charset="utf-8"></script>
   </head>
   <body ng-controller="mainController">
-    <p ng-repeat="animal in animals">{{animal.commonName}}</p>
+    <header ng-include="'/views/inputs.html'"></header>
+
+    <div ng-repeat="animal in animals">
+      <p>{{animal.commonName}}, {{animal.id}}</p>
+      <div class="photo"><img class="photos" ng-src="{{animal.imageURL}}"/></div>
+    </div>
+    <!-- <p ng-repeat="animal in animals">{{animal.commonName}}</p> -->
   </body>
 </html>

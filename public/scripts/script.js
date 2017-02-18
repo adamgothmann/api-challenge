@@ -12,14 +12,29 @@ myApp.controller('mainController', ['$scope', '$http', function($scope, $http){
     }).then(function(response){
       key = response.data;
       console.log(key);
-      $http({
-        method: 'GET',
-        url: 'https://animalrestapi.azurewebsites.net/Animal/List?candidateID=' + key + ''
-      }).then(function(response){
-        $scope.animals = response.data.list;
-        console.log($scope.animals);
-      });
+      $scope.apiCall();
     });
+  };
+  $scope.apiCall = function(){
+    $http({
+      method: 'GET',
+      url: 'https://animalrestapi.azurewebsites.net/Animal/List?candidateID=' + key + '',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }).then(function(response){
+      $scope.animals = response.data.list;
+      console.log($scope.animals);
+    });
+  };
+  $scope.createAnimal = function(){
+    var animalToSend = {
+      commonName: $scope.commonName,
+      scientificName: $scope.scientificName,
+      family: $scope.family,
+      url: $scope.url
+    };
+    console.log(animalToSend);
   };
 $scope.key();
 }]);
