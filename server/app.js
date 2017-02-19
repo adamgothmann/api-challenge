@@ -10,14 +10,12 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.get('/', function(req, res){
-  console.log('base url');
   res.sendFile(path.resolve('public/views/index.html'));
 });
 
 var env = process.env.API_KEY;
 
 app.get('/key', function(req, res){
-  console.log(env);
   res.json(env);
 });
 

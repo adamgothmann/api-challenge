@@ -49,7 +49,22 @@ myApp.controller('mainController', ['$scope', '$http', '$window', function($scop
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     });
-    // $window.location.reload();
+    $scope.animals.push(animalToSend);
+    $scope.apiCall();
   };
-$scope.key();
+  $scope.deleteAnimal = function(id, index){
+    console.log(id);
+    console.log(index);
+    $http({
+      method: 'POST',
+      url: 'https://animalrestapi.azurewebsites.net/Animal/Delete?id=' + id + '&candidateID=' + key + '',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    });
+    $scope.animals.splice(1, 3);
+    $scope.apiCall();
+  };
+
+  $scope.key();
 }]);

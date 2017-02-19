@@ -10,8 +10,8 @@
   <body ng-controller="mainController">
     <header ng-include="'/views/inputs.html'"></header>
 
-    <div ng-repeat="animal in animals">
-      <p>{{animal.commonName}}, {{animal.id}}</p>
+    <div ng-repeat="animal in animals" id="{{animal.id}}">
+      <p>{{animal.commonName}}, {{animal.id}} </p><button type="button" ng-click="deleteAnimal(animal.id, $index)" name="button">Delete</button>
       <div class="photo"><img class="photos" ng-src="{{animal.imageURL}}"/></div>
     </div>
     <!-- <p ng-repeat="animal in animals">{{animal.commonName}}</p> -->
