@@ -15,7 +15,7 @@ app.get('/', function(req, res){
 
 var env = process.env.API_KEY;
 
-app.get('/key', function(req, res){
+app.get('/key', function(req, res){ //retrieves the api key from the .env file.
   res.json(env);
 });
 

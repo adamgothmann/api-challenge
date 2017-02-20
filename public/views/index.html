@@ -3,17 +3,24 @@
   <head>
     <meta charset="utf-8">
     <title>Nevelex api challenge</title>
+    <link rel="stylesheet" href="/vendors/bootstrap.css">
+    <link rel="stylesheet" href="/style.css">
     <script src="/vendors/angular.min.js" charset="utf-8"></script>
     <script src="/vendors/jquery.min.js" charset="utf-8"></script>
     <script src="/scripts/script.js" charset="utf-8"></script>
   </head>
   <body ng-controller="mainController">
+    <div class="container">
     <header ng-include="'/views/inputs.html'"></header>
-
-    <div ng-repeat="animal in animals" id="{{animal.id}}">
-      <p>{{animal.commonName}}, {{animal.id}} </p><button type="button" ng-click="deleteAnimal(animal.id, $index)" name="button">Delete</button>
-      <div class="photo"><img class="photos" ng-src="{{animal.imageURL}}"/></div>
+    <div class="table">
+      <div class="row">
+        <div ng-repeat="animal in animals" class="square" id="{{animal.id}}">
+          <h3>{{animal.commonName}}</h3>
+          <div class="photo"><img class="photos" ng-src="{{animal.imageURL}}"/></div>
+          <button class="delete btn btn-danger" type="button" ng-click="deleteAnimal(animal.id, $index)" >Delete</button>
+        </div>
+      </div>
     </div>
-    <!-- <p ng-repeat="animal in animals">{{animal.commonName}}</p> -->
+    </div>
   </body>
 </html>

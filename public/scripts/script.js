@@ -1,10 +1,9 @@
 var myApp = angular.module('myApp', []);
 
-myApp.controller('mainController', ['$scope', '$http', '$window', function($scope, $http, $window){
+myApp.controller('mainController', ['$scope', '$http', function($scope, $http){
   var key;
   $scope.animals = [];
-  $scope.key = function(){
-    $http({
+    $http({ //retrieves the api key from server.
       method: 'GET',
       url: '/key'
     }).then(function(response){
@@ -12,8 +11,8 @@ myApp.controller('mainController', ['$scope', '$http', '$window', function($scop
       console.log(key);
       $scope.apiCall();
     });
-  };
-  $scope.apiCall = function(){
+
+  $scope.apiCall = function(){ //requests the data from the api.
     $http({
       method: 'GET',
       url: 'https://animalrestapi.azurewebsites.net/Animal/List?candidateID=' + key + '',
@@ -24,24 +23,9 @@ myApp.controller('mainController', ['$scope', '$http', '$window', function($scop
       $scope.animals = response.data.list;
       console.log($scope.animals);
     });
-  };
-  $scope.createAnimal = function(){
-    var animalToSend = {
-      commonName: $scope.commonName,
-      scientificName: $scope.scientificName,
-      family: $scope.family,
-      imageURL: $scope.imageURL
-    };
-    console.log(animalToSend);
-    //   url: 'https://animalrestapi.azurewebsites.net/Animal/Create',
-    //   headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    //   data: $.param({
-    //     commonName: $scope.commonName,
-    //     scientificName: $scope.scientificName,
-    //     family: $scope.family,
-    //     imageURL: $scope.imageURL,
-    //     candidateID: key
-    //   })
+  };//end of apiCall
+
+  $scope.createAnimal = function(){ //creates an animal and sends it to the database.
     $http({
       method: 'POST',
       url: 'https://animalrestapi.azurewebsites.net/Animal/Create?commonName=' + $scope.commonName + '&scientificName=' + $scope.scientificName + '&family=' + $scope.family + '&imageURL=' + $scope.imageURL + '&candidateID=' + key + '',
@@ -49,12 +33,12 @@ myApp.controller('mainController', ['$scope', '$http', '$window', function($scop
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     });
-    $scope.animals.push(animalToSend);
     $scope.apiCall();
   };
-  $scope.deleteAnimal = function(id, index){
+  $scope.deleteAnimal = function(id, index){ //deletes an animal from the database.
     console.log(id);
     console.log(index);
+    $scope.animals.splice(index, 1);
     $http({
       method: 'POST',
       url: 'https://animalrestapi.azurewebsites.net/Animal/Delete?id=' + id + '&candidateID=' + key + '',
@@ -62,9 +46,6 @@ myApp.controller('mainController', ['$scope', '$http', '$window', function($scop
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     });
-    $scope.animals.splice(1, 3);
     $scope.apiCall();
   };
-
-  $scope.key();
 }]);
